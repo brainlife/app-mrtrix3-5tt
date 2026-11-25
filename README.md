@@ -10,9 +10,9 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
 </p>
 
-> 📍 **This branch, `binarize-v1.0`, is the brainlife.io App Tissue-type segmentation** ([doi:10.25663/brainlife.app.239](https://doi.org/10.25663/brainlife.app.239)). The other Apps in this repository are listed under **Versions on brainlife.io** below.
+> **This branch, `binarize-v1.0`, is the brainlife.io App Tissue-type segmentation** ([doi:10.25663/brainlife.app.239](https://doi.org/10.25663/brainlife.app.239)). The other Apps in this repository are listed under **Versions on brainlife.io** below.
 
-## 🧠 At a glance
+## At a glance
 
 <!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
 
@@ -22,26 +22,26 @@ Runs 5ttgen fsl (FSL BET, FAST and FIRST; with -nocrop and -sgm_amyg_hipp) on th
 
 | | |
 |---|---|
-| 📥 **Inputs** | `neuro/anat/t1w` |
-| 📤 **Outputs** | `neuro/mask` |
-| 🐳 **Container** | `brainlife/mrtrix3:3.0_RC3` |
-| ⚙️ **Resources** | 2 CPUs · 3 h walltime |
-| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.239](https://doi.org/10.25663/brainlife.app.239) |
+| **Inputs** | `neuro/anat/t1w` |
+| **Outputs** | `neuro/mask` |
+| **Container** | `brainlife/mrtrix3:3.0_RC3` |
+| **Resources** | 2 CPUs · 3 h walltime |
+| **Run it** | [doi.org/10.25663/brainlife.app.239](https://doi.org/10.25663/brainlife.app.239) |
 
-#### 📥 Inputs
+#### Inputs
 
 | Input | Datatype | Required | Description |
 |---|---|---|---|
 | `anat` | `neuro/anat/t1w` | yes | T1-weighted anatomical image to segment into five tissue types. |
 
-#### 📤 Outputs
+#### Outputs
 
 | Output | Datatype | Description |
 |---|---|---|
 | `mask` | `neuro/mask` | 5TT image (mask.nii.gz) plus binarized gray matter (gm.nii.gz), white matter (wm.nii.gz) and CSF (csf.nii.gz) masks extracted from its volumes. |
 
 <details>
-<summary><b>⚙️ Parameters</b> (1)</summary>
+<summary><b>Parameters</b> (1)</summary>
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -51,7 +51,7 @@ Runs 5ttgen fsl (FSL BET, FAST and FIRST; with -nocrop and -sgm_amyg_hipp) on th
 
 <!-- brainlife-app:end -->
 
-## 🏷️ Versions on brainlife.io
+## Versions on brainlife.io
 
 This repository hosts two Apps, each built from its own branch. They use different `5ttgen` algorithms and are both maintained.
 
@@ -60,9 +60,9 @@ This repository hosts two Apps, each built from its own branch. They use differe
 | Tissue-type segmentation with hsvs | `5ttgen hsvs` on FreeSurfer output | 3.0.3 | [`hsvs-binarize-v1.0`](https://github.com/brainlife/app-mrtrix3-5tt/tree/hsvs-binarize-v1.0) | [doi:10.25663/brainlife.app.720](https://doi.org/10.25663/brainlife.app.720) | current |
 | **Tissue-type segmentation** (this branch) | `5ttgen fsl` on a T1-weighted image | 3.0_RC3 | [`binarize-v1.0`](https://github.com/brainlife/app-mrtrix3-5tt/tree/binarize-v1.0) | [doi:10.25663/brainlife.app.239](https://doi.org/10.25663/brainlife.app.239) | available |
 
-## 🚀 Running the App
+## Running the App
 
-### ☁️ On brainlife.io
+### On brainlife.io
 
 **With hsvs** ([doi.org/10.25663/brainlife.app.720](https://doi.org/10.25663/brainlife.app.720)): choose a `neuro/freesurfer` dataset and, optionally, a T1-weighted image whose voxel grid the 5TT image should use (`-template`). Set the hippocampus method (`hippocampal`: `subfields`, `first` or `aseg`) and thalamus method (`thalami`: `nuclei`, `first` or `aseg`), and optionally `white_stem` (brainstem as white matter), `nocrop` and `sgm_amyg_hipp` (amygdalae and hippocampi as subcortical gray matter).
 
@@ -70,7 +70,7 @@ This repository hosts two Apps, each built from its own branch. They use differe
 
 Both Apps archive a `neuro/mask` dataset tagged `5tt` and `5tt_masks` that MRtrix3 tracking Apps can use for ACT. The code was adapted from app-mrtrix3-act by Brent McPherson.
 
-### 💻 Locally
+### Locally
 
 You need [Singularity/Apptainer](https://apptainer.org/) and [`jq`](https://jqlang.github.io/jq/). The hsvs App runs `brainlife/mrtrix3:3.0.3-fsr`; the FSL App runs `brainlife/mrtrix3:3.0_RC3`.
 
@@ -104,7 +104,7 @@ You need [Singularity/Apptainer](https://apptainer.org/) and [`jq`](https://jqla
    ./main
    ```
 
-### 🧪 Sample data
+### Sample data
 
 Download a T1-weighted sample from brainlife.io with the [brainlife CLI](https://github.com/brainlife/cli):
 
@@ -115,7 +115,7 @@ mkdir input
 bl dataset download 5b96bbbf059cf900271924f2 && mv 5b96bbbf059cf900271924f2 input/t1
 ```
 
-## 📦 Outputs
+## Outputs
 
 ```text
 mask/
@@ -125,12 +125,12 @@ mask/
 └── csf.nii.gz    binarized CSF (volume 3)
 ```
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **`mask generation failed`** (hsvs): the CSF mask was not produced, so `5ttgen hsvs` or `mrconvert` failed. Check the log for the `5ttgen` error, for example FreeSurfer files missing for the chosen hippocampus or thalamus method.
 - **`mask generation failed`** (FSL): check the log for the `5ttgen fsl` error; for a skull-stripped T1 set `premask` to `true`.
 
-## 📚 Citing
+## Citing
 
 > [!TIP]
 > If you use this App in your work, please cite the App, the software it builds on and brainlife.io (below). GitHub's **Cite this repository** button gives the App citation in APA and BibTeX.
@@ -149,14 +149,14 @@ mask/
 - Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
 - Avesani P, McPherson B, Hayashi S, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. *Scientific Data* 6:69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-## 👥 Authors
+## Authors
 
 - Brad Caron
 - Brent McPherson
 
 **Contributors:** Soichi Hayashi
 
-## 💰 Funding
+## Funding
 
 [![Wellcome-226486/Z/22/Z](https://img.shields.io/badge/Wellcome-226486%2FZ%2F22%2FZ-purple.svg)](https://wellcome.org/)
 [![NIH-NINDS-U24NS140384](https://img.shields.io/badge/NIH_NINDS-U24NS140384-green.svg)](https://reporter.nih.gov/project-details/11261037)
@@ -175,6 +175,6 @@ mask/
 
 <sub>brainlife.io is publicly funded, and acknowledging that support helps keep it running. This App was developed with support from Wellcome, the U.S. National Institutes of Health (including the BRAIN Initiative BRAIN CONNECTS program: The Axonal Projectome EXchange, U24NS140384, and the Center for Mesoscale Connectomics, UM1NS132207) and the U.S. National Science Foundation.</sub>
 
-## ⚖️ License
+## License
 
 MIT; see the [`LICENSE`](https://github.com/brainlife/app-mrtrix3-5tt/blob/hsvs-binarize-v1.0/LICENSE) file on the App branches. MRtrix3, FSL and FreeSurfer are distributed under their own licenses.
